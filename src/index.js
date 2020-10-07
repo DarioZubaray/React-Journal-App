@@ -1,7 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { JounalApp } from './JounalApp';
+
+import './styles/style.scss'
 
 ReactDOM.render(
-  <App />,
+  <JounalApp />,
   document.getElementById('root')
 );
