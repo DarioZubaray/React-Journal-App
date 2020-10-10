@@ -1,5 +1,4 @@
 import React from 'react'
-import { NotesAppBar } from '../notes/NotesAppBar'
 import { NoteScreen } from '../notes/NoteScreen'
 // import { NothingSelected } from './NothingSelected'
 import { Sidebar } from './Sidebar'
