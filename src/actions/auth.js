@@ -1,12 +1,30 @@
 import { types } from '../types/types'
 import { firebase, googleAuthProvider } from '../firebase/firebase-config'
+import { finishLoading, startLoading } from './ui'
 
 export const startLoginWithEmailPassword = (email, password) => {
     return (dispatch) => {
+        dispatch( startLoading() )
 
-        setTimeout(() => {
-            dispatch( login(123, 'pedro') )
-        }, 3500);
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(({ user }) => {
+                dispatch( login( user.uid, user.displayName ) )
+
+                dispatch( finishLoading() )
+            })
+            .catch( err => {
+                console.log('error', err)
+                dispatch( finishLoading() )
+            })
+    }
+}
+
+export const startRegisterWithEmailPassword = (email, password, name) => {
+    return (dispatch) => {
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(async ({ user }) => {
+            await user.updateProfile({ displayName: name })
+            dispatch( login( user.uid, user.displayName ) )
+        })
     }
 }
 
