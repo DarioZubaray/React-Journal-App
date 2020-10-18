@@ -7,6 +7,7 @@ import { AuthRouter } from './AuthRouter'
 import { login } from '../actions/auth'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
+import { startLoadingNotes } from '../actions/notes'
 
 export const AppRouter = () => {
 
@@ -16,11 +17,14 @@ export const AppRouter = () => {
     const [ isLoggedIn, setLoggedIn ] = useState( false )
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged( (user) => {
+        firebase.auth().onAuthStateChanged( async (user) => {
 
             if ( user?.uid ) {
                 dispatch( login( user.uid, user.displayName ) )
                 setLoggedIn( true )
+
+
+                dispatch( startLoadingNotes( user.uid ) )
             } else {
                 setLoggedIn( false )
             }
@@ -31,7 +35,7 @@ export const AppRouter = () => {
 
     if ( checking ) {
         return (
-            <h1 className="loading">Espere...</h1>
+            <h1 className="loading">Please wait...</h1>
         )
     }
 
