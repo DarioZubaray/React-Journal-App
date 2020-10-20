@@ -16,7 +16,12 @@
     &:hover {
         color: darken($color: white, $amount: 25);
     }
-    
+
+}
+
+.btn-border {
+    border: solid 1px white;
+    margin: 0px 5px;
 }
 
 

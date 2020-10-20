@@ -35,7 +35,9 @@ export const AppRouter = () => {
 
     if ( checking ) {
         return (
-            <h1 className="loading">Please wait...</h1>
+            <div className="loading">
+                <h1 className="animate__animated animate__pulse animate__infinite">Please wait...</h1>
+            </div>
         )
     }
 
